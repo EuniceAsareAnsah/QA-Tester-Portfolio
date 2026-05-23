@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QA Tester Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #111118;
+      --bg3: #1a1a26;
+      --card: #13131e;
+      --border: rgba(120,100,255,0.15);
+      --accent: #7c5cfc;
+      --accent2: #00e5c0;
+      --accent3: #ff6b6b;
+      --accent4: #ffd166;
+      --text: #e8e6f0;
+      --muted: #7a7890;
+      --dim: #4a4860;
+      --crit: #ff5252;
+      --high: #ff9800;
+      --med: #ffd166;
+      --low: #69f0ae;
+      --pass: #00e5c0;
+      --fail: #ff5252;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Noise overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(124,92,252,0.18) 0%, transparent 70%);
+      top: -100px;
+      right: -100px;
+      pointer-events: none;
+    }
+    .hero-glow2 {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(0,229,192,0.1) 0%, transparent 70%);
+      bottom: 0;
+      left: -80px;
+      pointer-events: none;
+    }
+
+    .hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(124,92,252,0.1);
+      border: 1px solid rgba(124,92,252,0.3);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .badge::before { content: '▶'; font-size: 0.6rem; }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero h1 .line2 {
+      display: block;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin-top: 1.5rem;
+      font-weight: 300;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 2rem;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+    .tag {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 5px 14px;
+      font-size: 0.8rem;
+      font-family: 'DM Mono', monospace;
+      color: var(--muted);
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+    .btn-primary:hover { background: #6a4de8; transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* STATS BAR */
+    .stats-bar {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
+      padding: 2rem;
+    }
+    .stats-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 2rem;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-label { font-size: 0.78rem; color: var(--muted); font-family: 'DM Mono', monospace; letter-spacing: 0.05em; margin-top: 4px; }
+
+    /* SECTION */
+    section { padding: 5rem 2rem; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .section-desc { color: var(--muted); max-width: 560px; font-size: 0.95rem; }
+
+    /* BUG REPORTS */
+    .bugs-grid { display: flex; flex-direction: column; gap: 1px; margin-top: 3rem; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .bug-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto auto;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--card);
+      transition: background 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .bug-row:hover { background: var(--bg3); }
+    .bug-row + .bug-row { border-top: 1px solid var(--border); }
+
+    .sev {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .sev-crit { background: rgba(255,82,82,0.12); color: var(--crit); border: 1px solid rgba(255,82,82,0.3); }
+    .sev-crit::before { content: '●'; }
+    .sev-high { background: rgba(255,152,0,0.12); color: var(--high); border: 1px solid rgba(255,152,0,0.3); }
+    .sev-high::before { content: '●'; }
+    .sev-med { background: rgba(255,209,102,0.12); color: var(--med); border: 1px solid rgba(255,209,102,0.3); }
+    .sev-med::before { content: '●'; }
+
+    .bug-title { font-size: 0.9rem; font-weight: 500; }
+    .bug-module { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-top: 3px; }
+    .bug-status {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      background: rgba(255,82,82,0.08);
+      color: var(--crit);
+      border: 1px solid rgba(255,82,82,0.2);
+      padding: 3px 10px;
+      border-radius: 4px;
+    }
+    .bug-id { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--dim); }
+
+    /* TEST CASES */
+    .tc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-top: 3rem; }
+    .tc-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .tc-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .tc-id { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent); margin-bottom: 0.75rem; }
+    .tc-title { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 1rem; line-height: 1.3; margin-bottom: 0.75rem; }
+    .tc-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tc-chip {
+      font-size: 0.68rem;
+      font-family: 'DM Mono', monospace;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 4px;
+      color: var(--muted);
+    }
+    .tc-pass { display: flex; align-items: center; gap: 6px; margin-top: 1rem; font-family: 'DM Mono', monospace; font-size: 0.72rem; }
+    .pass-bar { flex: 1; height: 4px; background: var(--bg3); border-radius: 2px; overflow: hidden; }
+    .pass-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 2px; }
+    .pass-label { color: var(--accent2); }
+
+    /* TEST PLANS */
+    .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin-top: 3rem; }
+    .plan-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .plan-card:hover { border-color: var(--accent); }
+    .plan-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+    .plan-id { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--accent); margin-bottom: 1rem; }
+    .plan-title { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .plan-scope { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.5rem; }
+    .plan-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+    .plan-chip {
+      font-size: 0.68rem;
+      font-family: 'DM Mono', monospace;
+      background: rgba(124,92,252,0.08);
+      border: 1px solid rgba(124,92,252,0.2);
+      color: var(--accent);
+      padding: 3px 10px;
+      border-radius: 4px;
+    }
+
+    /* SKILLS */
+    .skills-section { background: var(--bg2); }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 3rem; }
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+    .skill-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .skill-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .skill-list { font-size: 0.78rem; color: var(--muted); line-height: 1.8; font-family: 'DM Mono', monospace; }
+
+    /* PROCESS */
+    .process-list { margin-top: 3rem; display: flex; flex-direction: column; gap: 0; }
+    .process-step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+    .process-num {
+      width: 48px;
+      height: 48px;
+      background: rgba(124,92,252,0.1);
+      border: 1px solid rgba(124,92,252,0.3);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-weight: 500;
+      color: var(--accent);
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .process-title { font-family: 'Syne', sans-serif; font-weight: 600; margin-bottom: 0.4rem; }
+    .process-desc { font-size: 0.85rem; color: var(--muted); }
+
+    /* CONTACT */
+    .contact-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 3rem;
+    }
+    .contact-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(124,92,252,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .contact-box h3 { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .contact-box p { color: var(--muted); margin-bottom: 2rem; }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10,10,15,0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--dim);
+    }
+
+    /* DIVIDER */
+    .divider { border: none; border-top: 1px solid var(--border); }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .bug-row { grid-template-columns: 1fr; }
+      .bug-id, .bug-status { display: none; }
+      .hero-cta { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">// qa.portfolio</span>
+  <ul class="nav-links">
+    <li><a href="#bugs">Bug Reports</a></li>
+    <li><a href="#testcases">Test Cases</a></li>
+    <li><a href="#plans">Test Plans</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="badge">Available for Remote Work</div>
+    <h1>
+      Manual QA Tester
+      <span class="line2">& Bug Hunter</span>
+    </h1>
+    <p class="hero-sub">
+      I find the edge cases, the broken flows, and the UI issues that slip past everyone else —
+      then document them clearly enough that developers can fix them fast.
+    </p>
+    <div class="hero-tags">
+      <span class="tag">Cross-Browser Testing</span>
+      <span class="tag">Mobile QA</span>
+      <span class="tag">Bug Reporting</span>
+      <span class="tag">Test Planning</span>
+      <span class="tag">Jira · Trello · Bugzilla</span>
+      <span class="tag">Chrome · Firefox · Safari · Edge</span>
+      <span class="tag">Android · iOS</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#bugs" class="btn btn-primary">🐛 View Bug Reports</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Bug Reports Filed</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Test Case Suites</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Test Plans Written</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Browsers & Devices</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">89%</div>
+      <div class="stat-label">Avg Pass Rate</div>
+    </div>
+  </div>
+</div>
+
+<!-- BUG REPORTS -->
+<section id="bugs">
+  <div class="section-inner">
+    <div class="section-label">// bug-reports</div>
+    <h2 class="section-title">Issues Found & Documented</h2>
+    <p class="section-desc">Every bug report includes severity classification, full reproduction steps, expected vs actual behavior, and annotated evidence.</p>
+
+    <div class="bugs-grid" style="margin-top: 3rem;">
+      <a class="bug-row" href="docs/bug-reports/BUG-001-checkout-total-miscalculation.md">
+        <span class="sev sev-crit">Critical</span>
+        <div>
+          <div class="bug-title">Checkout total miscalculates when coupon + tax applied</div>
+          <div class="bug-module">Checkout / Pricing Logic</div>
+        </div>
+        <span class="bug-status">Open</span>
+        <span class="bug-id">BUG-001</span>
+      </a>
+      <a class="bug-row" href="docs/bug-reports/BUG-002-005-reports.md">
+        <span class="sev sev-high">High</span>
+        <div>
+          <div class="bug-title">Login form validation bypassed via keyboard shortcut</div>
+          <div class="bug-module">Authentication / Form Validation</div>
+        </div>
+        <span class="bug-status">Open</span>
+        <span class="bug-id">BUG-002</span>
+      </a>
+      <a class="bug-row" href="docs/bug-reports/BUG-002-005-reports.md#bug-report-bug-003">
+        <span class="sev sev-med">Medium</span>
+        <div>
+          <div class="bug-title">Mobile nav menu overlaps content on iOS Safari (iPhone 14)</div>
+          <div class="bug-module">UI / Mobile Navigation / safe-area</div>
+        </div>
+        <span class="bug-status">Open</span>
+        <span class="bug-id">BUG-003</span>
+      </a>
+      <a class="bug-row" href="docs/bug-reports/BUG-002-005-reports.md">
+        <span class="sev sev-med">Medium</span>
+        <div>
+          <div class="bug-title">Search with no results shows broken, empty UI state</div>
+          <div class="bug-module">Search / Empty States</div>
+        </div>
+        <span class="bug-status">Open</span>
+        <span class="bug-id">BUG-004</span>
+      </a>
+      <a class="bug-row" href="docs/bug-reports/BUG-002-005-reports.md">
+        <span class="sev sev-crit">Critical</span>
+        <div>
+          <div class="bug-title">Password reset email not delivered to Gmail addresses (DKIM failure)</div>
+          <div class="bug-module">Auth / Email Deliverability</div>
+        </div>
+        <span class="bug-status">Open</span>
+        <span class="bug-id">BUG-005</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- TEST CASES -->
+<section id="testcases">
+  <div class="section-inner">
+    <div class="section-label">// test-cases</div>
+    <h2 class="section-title">Test Case Suites</h2>
+    <p class="section-desc">Detailed, structured test cases covering positive paths, negative paths, and edge cases for each module.</p>
+
+    <div class="tc-grid">
+      <a class="tc-card" href="docs/test-cases/TC-001-user-authentication.md">
+        <div class="tc-id">TC-001</div>
+        <div class="tc-title">User Authentication</div>
+        <div class="tc-meta">
+          <span class="tc-chip">Login</span>
+          <span class="tc-chip">Register</span>
+          <span class="tc-chip">Logout</span>
+          <span class="tc-chip">Reset</span>
+        </div>
+        <div class="tc-pass">
+          <div class="pass-bar"><div class="pass-fill" style="width:87.5%"></div></div>
+          <span class="pass-label">87.5% pass</span>
+        </div>
+      </a>
+      <a class="tc-card" href="docs/test-cases/TC-002-shopping-cart-functionality.md">
+        <div class="tc-id">TC-002</div>
+        <div class="tc-title">Shopping Cart Functionality</div>
+        <div class="tc-meta">
+          <span class="tc-chip">Cart</span>
+          <span class="tc-chip">Coupons</span>
+          <span class="tc-chip">Persistence</span>
+        </div>
+        <div class="tc-pass">
+          <div class="pass-bar"><div class="pass-fill" style="width:87.5%"></div></div>
+          <span class="pass-label">87.5% pass</span>
+        </div>
+      </a>
+      <a class="tc-card" href="docs/test-cases/TC-003-responsive-layout-cross-browser.md">
+        <div class="tc-id">TC-003</div>
+        <div class="tc-title">Responsive Layout & Cross-Browser</div>
+        <div class="tc-meta">
+          <span class="tc-chip">Mobile</span>
+          <span class="tc-chip">Tablet</span>
+          <span class="tc-chip">Chrome/Firefox/Safari</span>
+        </div>
+        <div class="tc-pass">
+          <div class="pass-bar"><div class="pass-fill" style="width:85.7%"></div></div>
+          <span class="pass-label">85.7% pass</span>
+        </div>
+      </a>
+      <a class="tc-card" href="docs/test-cases/TC-004-mobile-app-onboarding.md">
+        <div class="tc-id">TC-004</div>
+        <div class="tc-title">Mobile App Onboarding Flow</div>
+        <div class="tc-meta">
+          <span class="tc-chip">iOS</span>
+          <span class="tc-chip">Android</span>
+          <span class="tc-chip">Biometric</span>
+          <span class="tc-chip">A11y</span>
+        </div>
+        <div class="tc-pass">
+          <div class="pass-bar"><div class="pass-fill" style="width:93%"></div></div>
+          <span class="pass-label">93% pass</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- TEST PLANS -->
+<section id="plans">
+  <div class="section-inner">
+    <div class="section-label">// test-plans</div>
+    <h2 class="section-title">Test Plans</h2>
+    <p class="section-desc">End-to-end test plans defining scope, strategy, entry/exit criteria, test data, and risk assessment.</p>
+
+    <div class="plans-grid">
+      <a class="plan-card" href="docs/test-plans/TP-001-ecommerce-checkout-test-plan.md">
+        <div class="plan-id">TP-001</div>
+        <div class="plan-title">E-Commerce Checkout Flow</div>
+        <div class="plan-scope">Full checkout coverage: cart → address → payment → confirmation. 18 test cases across 6 browser/device combinations.</div>
+        <div class="plan-chips">
+          <span class="plan-chip">Functional</span>
+          <span class="plan-chip">Regression</span>
+          <span class="plan-chip">Cross-Browser</span>
+          <span class="plan-chip">Mobile</span>
+        </div>
+      </a>
+      <a class="plan-card" href="docs/test-plans/TP-002-mobile-app-regression-test-plan.md">
+        <div class="plan-id">TP-002</div>
+        <div class="plan-title">Mobile App Regression Suite</div>
+        <div class="plan-scope">Full regression of TaskFlow mobile app v2.1.0 across 7 Android and iOS devices. Covers auth, tasks, notifications, offline mode.</div>
+        <div class="plan-chips">
+          <span class="plan-chip">Regression</span>
+          <span class="plan-chip">Android</span>
+          <span class="plan-chip">iOS</span>
+          <span class="plan-chip">Offline</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-section">
+  <div class="section-inner">
+    <div class="section-label">// skills & tools</div>
+    <h2 class="section-title">What I Bring to Every Project</h2>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">🌐</div>
+        <div class="skill-name">Cross-Browser Testing</div>
+        <div class="skill-list">Chrome · Firefox · Safari<br>Edge · Samsung Internet<br>Desktop & Mobile versions</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📱</div>
+        <div class="skill-name">Mobile App Testing</div>
+        <div class="skill-list">iOS · Android<br>Multiple screen sizes<br>Biometric · Push notifications</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🐛</div>
+        <div class="skill-name">Bug Tracking Tools</div>
+        <div class="skill-list">Jira · Trello · Bugzilla<br>Asana · TestRail<br>GitHub Issues</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📋</div>
+        <div class="skill-name">Documentation</div>
+        <div class="skill-list">Test plans · Test cases<br>Bug reports · Regression<br>Release sign-off reports</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🔍</div>
+        <div class="skill-name">Testing Techniques</div>
+        <div class="skill-list">Functional · Regression<br>Negative testing · Edge cases<br>UAT · Smoke testing</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🛠️</div>
+        <div class="skill-name">Technical Tools</div>
+        <div class="skill-list">Chrome DevTools · Postman<br>HTML/CSS knowledge<br>Browser console · Network tab</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-inner">
+    <div class="section-label">// testing process</div>
+    <h2 class="section-title">How I Approach Quality</h2>
+
+    <div class="process-list">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <div>
+          <div class="process-title">Requirements Review</div>
+          <div class="process-desc">Carefully read user stories, acceptance criteria, and feature specs to understand what "done" looks like before touching the app.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <div>
+          <div class="process-title">Test Planning</div>
+          <div class="process-desc">Define scope, strategy, entry/exit criteria, risk areas, and test data requirements. Produce a test plan document for alignment.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <div>
+          <div class="process-title">Test Case Design</div>
+          <div class="process-desc">Write positive, negative, and edge case scenarios for each feature. Include data variations, boundary conditions, and error paths.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">04</div>
+        <div>
+          <div class="process-title">Test Execution</div>
+          <div class="process-desc">Systematic execution across all required browsers and devices. Mark pass/fail, capture evidence for any failures.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">05</div>
+        <div>
+          <div class="process-title">Bug Reporting</div>
+          <div class="process-desc">Clear, developer-friendly bug reports with steps to reproduce, expected vs actual results, severity, and annotated screenshots.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">06</div>
+        <div>
+          <div class="process-title">Regression & Sign-off</div>
+          <div class="process-desc">After fixes, verify bugs are resolved and check for side effects. Produce a final report confirming release readiness.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-box">
+      <h3>Let's Work Together</h3>
+      <p>Looking for a remote QA Tester who communicates clearly, finds the real bugs, and documents everything properly?</p>
+      <a href="mailto:your.email@example.com" class="btn btn-primary">📧 Send Me an Email</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>// QA Portfolio — Manual Testing · Cross-Browser · Mobile · Documentation · Built for GitHub Pages</p>
+</footer>
+
+</body>
+</html>
