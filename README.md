@@ -92,7 +92,7 @@ qa-portfolio/
 | Browser | Versions | Platform |
 |---|---|---|
 | Google Chrome | Latest, Latest-1 | Windows, macOS, Android |
-| Mozilla Firefox | Latest, ESR | Windows, macOS |
+| Mozilla Firefox | Latest, ESR | Windows, macOS | Samsung internet
 | Safari | Latest | macOS, iOS |
 | Microsoft Edge | Latest | Windows |
 | Samsung Internet | Latest | Android |
@@ -103,6 +103,6 @@ qa-portfolio/
 
 Open to remote QA Tester roles. Let's connect!
 
-- 📧 Email: your.email@example.com
-- 💼 LinkedIn: linkedin.com/in/yourprofile
-- 🌐 Portfolio: [View Live](https://yourusername.github.io/qa-portfolio)
+- 📧 Email: your.euniceansah98@egmail.com
+- 💼 LinkedIn: linkedin.com/in/eunice-ansah-asare
+- 🌐 Portfolio: [View Live](https://euniceasareansah.github.io/qa-tester-portfolio)
