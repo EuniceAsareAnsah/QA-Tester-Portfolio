@@ -1,6 +1,6 @@
 # 🧪 QA Testing Portfolio
 
-**Manual QA Tester | Bug Reporter | Software Quality Advocate**
+**Manual QA Tester | Software Test Lead | Software Quality Advocate**
 
 ---
 
