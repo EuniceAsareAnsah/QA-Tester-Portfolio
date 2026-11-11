@@ -103,6 +103,6 @@ qa-portfolio/
 
 Open to remote QA Tester roles. Let's connect!
 
-- 📧 Email: your.euniceansah98@egmail.com
+- 📧 Email: euniceansah98@gmail.com
 - 💼 LinkedIn: linkedin.com/in/eunice-ansah-asare
-- 🌐 Portfolio: [View Live](https://euniceasareansah.github.io/qa-tester-portfolio)
+- 🌐 Portfolio: [View Live](https://qa-portfolio-aa2s.vercel.app/)
